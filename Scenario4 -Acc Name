@@ -1,0 +1,10 @@
+trigger scenario4_accnamechange on Account (before update) {
+    if(Trigger.isBefore && Trigger.isUpdate){
+        for(Account accRecNew:Trigger.new){
+           	Account accRecOld=Trigger.oldMap.get(accRecNew.Id);
+            if(accRecNew.Name!=accRecOld.Name)
+                accRecNew.addError('Account Name cannot be modified once given');
+        }
+    }
+
+}
