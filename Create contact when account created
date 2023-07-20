@@ -1,1 +1,18 @@
+trigger contactca on Account (after insert) {
+    list<contact> contactlist = new list<contact>();
+    for(account acc : trigger.new){
+        contact newcontact = new contact();
+        newcontact.LastName = a.Name;
+        newcontact.AccountId = a.Id;
+        contactlist.add(newcontact);
+    }
+	insert contactlist;
+}
 
+
+
+
+Debug log check :
+
+Account acc = new Account(Name = 'Test Account');
+insert acc;
