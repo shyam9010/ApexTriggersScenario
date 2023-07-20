@@ -1,13 +1,16 @@
-trigger contactca on Account (after insert) {
+trigger scenario3_concreationonacc on Account (before insert) {
     list<contact> contactlist = new list<contact>();
     for(account acc : trigger.new){
         contact newcontact = new contact();
-        newcontact.LastName = a.Name;
-        newcontact.AccountId = a.Id;
+        newcontact.LastName = acc.Name;
+        newcontact.AccountId = acc.Id;
         contactlist.add(newcontact);
     }
 	insert contactlist;
 }
+
+
+
 
 
 
